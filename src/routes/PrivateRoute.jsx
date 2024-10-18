@@ -1,18 +1,21 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { UserContext } from '../context/UserContext.jsx'
-import { Navigate, Route } from 'react-router-dom'
+import { Route, useNavigate } from 'react-router-dom'
 
 PrivateRoute.propTypes = {
   path: PropTypes.string.isRequired,
-  component: PropTypes.element.isRequired
+  element: PropTypes.element.isRequired
 }
 
-function PrivateRoute({ path, component }) {
+function PrivateRoute({ path, element }) {
   const { getUserInfos } = useContext(UserContext)
   const user = getUserInfos()
-
-  // return <Route index path={path} element={} />;
+  const navigate = useNavigate();
+  if(!user){
+    navigate('/login');
+  }
+  return <Route index path={path} element={element} />;
 }
 
 export default PrivateRoute

@@ -10,6 +10,8 @@ import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import Logout from './pages/Logout.jsx'
+import PrivateRoute from './routes/PrivateRoute.jsx'
+import Cv from './pages/Cv.jsx'
 
 function App() {
   return (
@@ -18,10 +20,10 @@ function App() {
       <Routes>
         <Route index path="/" element={<Home />} />
         <Route path="/welcome" element={<Welcome />} />
-        <Route path="/counter" element={<Count />} />
         <Route path="/users/:id" element={<UserProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cv" element={<Cv />} />
         <Route path="/logout" element={<Logout />} />
 
       </Routes>
