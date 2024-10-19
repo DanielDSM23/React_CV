@@ -34,7 +34,6 @@ function Login() {
             if (response.ok) {
               const data = await response.json()
               login(data);
-              localStorage.setItem('user', data);
               navigate('/', { replace: true })
             } else {
               document.querySelector('#error-login').classList.remove('visually-hidden')
