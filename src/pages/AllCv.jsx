@@ -1,6 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import SearchCv from '../components/SearchCv.jsx'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import SearchCv from '../components/SearchCv.jsx';
+
+const {
+  VITE_API_URL
+} = import.meta.env;
 
 
 function AllCv() {
@@ -18,7 +22,7 @@ function AllCv() {
   }
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.API_URL}/api/cv`);
+      const response = await fetch(`${VITE_API_URL}/api/cv`);
       const data = await response.json();
       console.log(data)
       setCvs(data);

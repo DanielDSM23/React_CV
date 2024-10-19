@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { UserContext } from '../context/UserContext.jsx';
 
+const {
+  VITE_API_URL
+} = import.meta.env;
+
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +15,30 @@ function Login() {
   if(login){
     navigate('/');
   }
+
+  const handleSubmit = async (values) => {
+    console.log(values)
+    try {
+      const response = await fetch(`${VITE_API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      })
+      console.log(response.status)
+      if (response.ok) {
+        const data = await response.json()
+        login(data);
+        navigate('/', { replace: true })
+      } else {
+        document.querySelector('#error-login').classList.remove('visually-hidden')
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -21,27 +49,7 @@ function Login() {
           email: '',
           password: ''
         }}
-        onSubmit={async (values) => {
-          try {
-            const response = await fetch(`${process.env.API_URL}/api/auth/login`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(values)
-            })
-            console.log(response.status)
-            if (response.ok) {
-              const data = await response.json()
-              login(data);
-              navigate('/', { replace: true })
-            } else {
-              document.querySelector('#error-login').classList.remove('visually-hidden')
-            }
-          } catch (error) {
-            console.log(error.message)
-          }
-        }}
+        onSubmit={handleSubmit}
         validationSchema={Yup.object({
           email: Yup.string().required('Required'),
           password: Yup.string().required('Required')

@@ -1,6 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../context/UserContext.jsx'
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { UserContext } from '../context/UserContext.jsx';
+const {
+  VITE_API_URL
+} = import.meta.env;
 
 function Cv() {
   const { id } = useParams();
@@ -28,7 +31,7 @@ function Cv() {
   }, [user, navigate]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.API_URL}/api/cv/`+id, {
+      const response = await fetch(`${VITE_API_URL}/api/cv/`+id, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.user.token}`, // Include the Bearer token
