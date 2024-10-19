@@ -18,7 +18,7 @@ function AllCv() {
   }
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.API_URL}/api/cv`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cv`);
       const data = await response.json();
       console.log(data)
       setCvs(data);

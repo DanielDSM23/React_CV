@@ -28,7 +28,7 @@ function Cv() {
   }, [user, navigate]);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.API_URL}/api/cv/`+id, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cv/`+id, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${user.user.token}`, // Include the Bearer token
