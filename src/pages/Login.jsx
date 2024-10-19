@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { UserContext } from '../context/UserContext.jsx';
@@ -23,7 +23,7 @@ function Login() {
         }}
         onSubmit={async (values) => {
           try {
-            const response = await fetch(`http://localhost:3003/api/auth/login`, {
+            const response = await fetch(`${process.env.API_URL}/api/auth/login`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

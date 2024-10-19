@@ -18,7 +18,7 @@ function AllCv() {
   }
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3003/api/cv');
+      const response = await fetch(`${process.env.API_URL}/api/cv`);
       const data = await response.json();
       console.log(data)
       setCvs(data);
