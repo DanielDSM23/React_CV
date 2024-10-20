@@ -45,9 +45,9 @@ function MyCv() {
       console.error(error.message);
     }
   };
-  const handleDeleteXp = async (id) => {
+  const handleDelete = async (id, cat) => {
     try {
-      const response = await fetch(`${VITE_API_URL}/api/cv/profession/${id}`, {
+      const response = await fetch(`${VITE_API_URL}/api/cv/${cat}/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`,
@@ -58,7 +58,7 @@ function MyCv() {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        alert("Experience supprimée");
+        alert((cat === 'profession') ? "Experience supprimée" : "Formation supprimée");
         navigate(0);
       }
     } catch (error) {
@@ -143,7 +143,7 @@ function MyCv() {
                       <Link to={`/my-cv/profession/edit/${experience._id}`}>
                         <button className="btn btn-primary btn-sm me-2">Modifier</button>
                       </Link>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDeleteXp(experience._id)}>Supprimer</button>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(experience._id, "profession")}>Supprimer</button>
                     </div>
                   </li>
                 ))}
@@ -172,7 +172,7 @@ function MyCv() {
                       <Link to={`/my-cv/education/edit/${edu._id}`}>
                         <button className="btn btn-primary btn-sm me-2">Modifier</button>
                       </Link>
-                      <button className="btn btn-danger btn-sm">Supprimer</button>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(edu._id, "education")}>Supprimer</button>
                     </div>
                   </li>
                 ))}

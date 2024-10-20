@@ -13,10 +13,19 @@ XpEditor.propTypes = {
 };
 
 function XpEditor({ methodRequest, textButton }) {
+  let xpInitialValue;
+
+  if(methodRequest === 'POST'){
+    xpInitialValue = [];
+  }
+  else{
+    xpInitialValue = null;
+  }
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { login, getUserInfos } = useContext(UserContext);
-  const [experience, setExperience] = useState(null);
+  const [experience, setExperience] = useState( xpInitialValue);
   const user = getUserInfos();
 
   useEffect(() => {
@@ -44,17 +53,31 @@ function XpEditor({ methodRequest, textButton }) {
   }, [user.token, id, methodRequest]);
 
   const handleSubmit = async (values) => {
+    if (values.startDate) {
+    values.startDate = new Date(values.startDate).toISOString(); // Converts to '2024-10-14T21:04:53.714Z'
+  }
+    if (values.endDate) {
+      values.endDate = new Date(values.endDate).toISOString(); // Converts to '2024-10-14T21:04:53.714Z'
+    }
+
     Object.keys(values).forEach((key) => {
-      if (values[key] === undefined) {
+      if (values[key] === '') {
         delete values[key];
       }
     });
     console.log(values);
+
+
+
+
     try {
       let idProfession = id;
       if (methodRequest === 'POST') {
         idProfession = '';
+
       }
+
+      console.log(JSON.stringify(values));
       const response = await fetch(`${VITE_API_URL}/api/cv/profession/${idProfession}`, {
         method: methodRequest,
         headers: {
@@ -64,11 +87,11 @@ function XpEditor({ methodRequest, textButton }) {
         body: JSON.stringify(values),
       });
       console.log(response.status);
-      if (response.ok) {
+      //if (response.ok) {
         const data = await response.json();
         console.log(data);
         navigate('/my-cv', { replace: true });
-      }
+      //}
     } catch (error) {
       console.log(error.message);
     }
@@ -76,9 +99,7 @@ function XpEditor({ methodRequest, textButton }) {
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
-    // Parse the date string to a Date object
     const date = new Date(dateString);
-    // Format it to YYYY-MM-DD
     return date.toISOString().split('T')[0]; // '2024-10-24'
   };
 
@@ -89,7 +110,7 @@ function XpEditor({ methodRequest, textButton }) {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
-      style={{ height: '100vh' }} // Full page height and background color
+      style={{ height: '100vh' }}
     >
       <Formik
         initialValues={{
