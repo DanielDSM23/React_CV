@@ -13,6 +13,8 @@ import Logout from './pages/Logout.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import Cv from './pages/Cv.jsx'
 import AllCv from './pages/AllCv.jsx'
+import MyCv from './pages/MyCv.jsx'
+import ProfileEditor from './pages/ProfileEditor.jsx'
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cv" element={<AllCv />} />
         <Route path="/cv/:id" element={<Cv />} />
+        <Route path="/my-cv" element={<MyCv />} />
+        <Route path="/profile" element={<ProfileEditor />} />
         <Route path="/logout" element={<Logout />} />
 
       </Routes>

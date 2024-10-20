@@ -29,7 +29,8 @@ function Login() {
       console.log(response.status)
       if (response.ok) {
         const data = await response.json()
-        login(data);
+        login(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate('/', { replace: true })
       } else {
         document.querySelector('#error-login').classList.remove('visually-hidden')
