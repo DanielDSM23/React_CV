@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup';
 import { UserContext } from '../context/UserContext.jsx';
 
@@ -83,6 +83,9 @@ function Login() {
               <div className={'visually-hidden alert alert-danger'} id={'error-login'} role="alert">
                 Les informations renseignées sont incorrectes
               </div>
+              <Link to={"/register"}>
+                Creer compte
+              </Link>
             </div>
           </Form>
         )}

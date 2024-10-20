@@ -15,6 +15,8 @@ import Cv from './pages/Cv.jsx'
 import AllCv from './pages/AllCv.jsx'
 import MyCv from './pages/MyCv.jsx'
 import ProfileEditor from './pages/ProfileEditor.jsx'
+import XpEditor from './pages/XpEditor.jsx'
+import EduEditor from './pages/EduEditor.jsx'
 
 function App() {
   return (
@@ -34,6 +36,10 @@ function App() {
         <Route path="/cv" element={<AllCv />} />
         <Route path="/cv/:id" element={<Cv />} />
         <Route path="/my-cv" element={<MyCv />} />
+        <Route path="/my-cv/profession/edit/:id" element={<XpEditor methodRequest={"PUT"} textButton={"Modifier"} />} />
+        <Route path="/my-cv/education/edit/:id" element={<EduEditor methodRequest={"PUT"} textButton={"Modifier"} />} />
+        <Route path="/my-cv/profession/add" element={<XpEditor methodRequest={"POST"} textButton={"Ajouter"} />} />
+        <Route path="/my-cv/education/add" element={<EduEditor methodRequest={"POST"} textButton={"Ajouter"} />} />
         <Route path="/profile" element={<ProfileEditor />} />
         <Route path="/logout" element={<Logout />} />
 
