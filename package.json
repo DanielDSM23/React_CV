@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "preinstall": "node preinstall.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",

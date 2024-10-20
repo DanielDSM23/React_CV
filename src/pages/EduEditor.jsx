@@ -13,10 +13,21 @@ EduEditor.propTypes = {
 };
 
 function EduEditor({ methodRequest, textButton }) {
+
+  let eduInitialValue;
+
+  if(methodRequest === 'POST'){
+    eduInitialValue = [];
+  }
+  else{
+    eduInitialValue = null;
+  }
+
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { login, getUserInfos } = useContext(UserContext);
-  const [institution, setInstitution] = useState(null);
+  const [institution, setInstitution] = useState(eduInitialValue);
   const user = getUserInfos();
 
   useEffect(() => {
@@ -77,7 +88,6 @@ function EduEditor({ methodRequest, textButton }) {
         const data = await response.json();
         console.log(data);
         navigate('/my-cv', { replace: true });
-        setInstitution(data);
       }
     } catch (error) {
       console.log(error.message);
