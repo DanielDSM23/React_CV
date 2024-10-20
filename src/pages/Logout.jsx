@@ -9,5 +9,7 @@ export default function Logout() {
 
   logout();
 
+  localStorage.removeItem('user');
+
   navigate('/');
 }
